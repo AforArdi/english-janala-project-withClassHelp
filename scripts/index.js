@@ -20,14 +20,23 @@ const loadLevelWork=(id)=>{
 const displayWord=(words)=>{
     const wordContainer = document.getElementById('words-container');
     wordContainer.innerHTML = '';
+    if(words.length == 0){
+        wordContainer.innerHTML = `
+        <div class="font-bangla col-span-full text-center">
+            <img class="mx-auto" src="./assets/alert-error.png" alt="">
+            <p class="">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <p class="text-2xl font-bold">নেক্সট Lesson এ যান</p>
+        </div>
+        `
+    }
     words.forEach((word)=>{
         console.log(word);
         const wordCard = document.createElement('div');
         wordCard.innerHTML = `
         <div class="bg-white px-8 py-10 rounded-xl text-center space-y-3">
-            <h2 class="text-2xl font-bold">${word.word}</h2>
+            <h2 class="text-2xl font-bold">${word.word ? word.word : 'word পাওয়া যায় নি'}</h2>
             <p>Meaning / Pronounciation</p>
-            <p class="font-bangla text-xl font-medium">"${word.meaning} / ${word.pronunciation}"</p>
+            <p class="font-bangla text-xl font-medium">"${word.meaning ? word.meaning : 'Meaning পাওয়া যায় নি'} / ${word.pronunciation ? word.pronunciation : 'pronunciation পাওয়া যায় নি'}"</p>
             <div class="flex justify-between">
                 <button class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-volume-high"></i></button>
