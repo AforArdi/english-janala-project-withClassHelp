@@ -7,7 +7,6 @@ const loadLessons = () => {
 const removeActiveClass=()=>{
     const lessonBtns = document.querySelectorAll('.lesson-btn');
     lessonBtns.forEach((btn)=> btn.classList.remove('active'));
-    return;
 }
 
 const loadLevelWork=(id)=>{
