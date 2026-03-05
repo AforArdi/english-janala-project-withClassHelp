@@ -44,11 +44,11 @@ const displayWordDetails=(word)=>{
     const detailsContainer = document.getElementById('details-container');
     detailsContainer.innerHTML = `
         <div>
-            <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i> : <span class="font-bangla">${word.pronunciation}</span>)</h2>
+            <h2 class="text-2xl font-bold">${word.word ? word.word : 'word পাওয়া যায় নি'} (<i class="fa-solid fa-microphone-lines"></i> : <span class="font-bangla">${word.pronunciation ? word.pronunciation : 'pronunciation পাওয়া যায় নি'}</span>)</h2>
         </div>
         <div>
             <h2 class="text-2xl font-bold">Meaning</h2>
-            <p class="font-bangla text-xl font-medium">${word.meaning}</p>
+            <p class="font-bangla text-xl font-medium">${word.meaning ? word.meaning : 'Meaning পাওয়া যায় নি'}</p>
         </div>
         <div>
             <h2 class="text-2xl font-bold">Example</h2>
