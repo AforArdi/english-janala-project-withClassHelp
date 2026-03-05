@@ -1,3 +1,9 @@
+// creating element to show dynamic synonyms
+const createElement=(arr)=>{
+    const newElement = arr.map((el) => `<span class="btn">${el}</span>`);
+    return newElement.join(' ');
+}
+
 const loadLessons = () => {
     fetch('https://openapi.programming-hero.com/api/levels/all')
         .then((res) => res.json())
@@ -27,6 +33,37 @@ const loadLevelWork=(id)=>{
 //     "meaning": "দৌড়ানো",
 //     "pronunciation": "রান"
 // }
+const loadWordDetails=async(id)=>{
+ const url = `https://openapi.programming-hero.com/api/word/${id}`
+ const res = await fetch(url);
+ const json = await res.json();
+ displayWordDetails(json.data);
+}
+const displayWordDetails=(word)=>{
+    // console.log(word);
+    const detailsContainer = document.getElementById('details-container');
+    detailsContainer.innerHTML = `
+        <div>
+            <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i> : <span class="font-bangla">${word.pronunciation}</span>)</h2>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold">Meaning</h2>
+            <p class="font-bangla text-xl font-medium">${word.meaning}</p>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold">Example</h2>
+            <p class="text-[20px]">${word.sentence}</p>
+        </div>
+        <div>
+            <h2 class="text-2xl font-bold font-bangla">সমার্থক শব্দ গুলো</h2>
+        </div>
+        <div class="flex gap-4">
+            <div>${createElement(word.synonyms)}</div>
+        </div>
+    `;
+    document.getElementById('my_modal_word').showModal(); // very important to understant
+}
+
 const displayWord=(words)=>{
     const wordContainer = document.getElementById('words-container');
     wordContainer.innerHTML = '';
@@ -48,7 +85,7 @@ const displayWord=(words)=>{
             <p>Meaning / Pronounciation</p>
             <p class="font-bangla text-xl font-medium">"${word.meaning ? word.meaning : 'Meaning পাওয়া যায় নি'} / ${word.pronunciation ? word.pronunciation : 'pronunciation পাওয়া যায় নি'}"</p>
             <div class="flex justify-between">
-                <button class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="(loadWordDetails(${word.id}))" class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
