@@ -1,3 +1,14 @@
+// spinner
+const manageSpinner=(status)=>{
+    if(status==true){
+        document.getElementById('spinner').classList.remove('hidden');
+        document.getElementById('words-container').classList.add('hidden');
+    } else{
+        document.getElementById('words-container').classList.remove('hidden');
+        document.getElementById('spinner').classList.add('hidden');
+    }
+}
+
 // creating element to show dynamic synonyms
 const createElement=(arr)=>{
     const newElement = arr.map((el) => `<span class="btn">${el}</span>`);
@@ -16,6 +27,7 @@ const removeActiveClass=()=>{
 }
 
 const loadLevelWork=(id)=>{
+    manageSpinner(true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
         .then((res)=> res.json())
@@ -74,7 +86,9 @@ const displayWord=(words)=>{
             <p class="">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
             <p class="text-2xl font-bold">নেক্সট Lesson এ যান</p>
         </div>
-        `
+        `;
+        manageSpinner(false);
+        return;
     }
     words.forEach((word)=>{
         console.log(word);
@@ -91,7 +105,8 @@ const displayWord=(words)=>{
         </div>
         `;
         wordContainer.append(wordCard);
-    })
+    });
+    manageSpinner(false);
 }
 
 const displayLessons=(lessons)=>{
