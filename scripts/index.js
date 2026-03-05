@@ -9,6 +9,13 @@ const manageSpinner=(status)=>{
     }
 }
 
+// pronunciation function from github
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 // creating element to show dynamic synonyms
 const createElement=(arr)=>{
     const newElement = arr.map((el) => `<span class="btn">${el}</span>`);
@@ -100,7 +107,7 @@ const displayWord=(words)=>{
             <p class="font-bangla text-xl font-medium">"${word.meaning ? word.meaning : 'Meaning পাওয়া যায় নি'} / ${word.pronunciation ? word.pronunciation : 'pronunciation পাওয়া যায় নি'}"</p>
             <div class="flex justify-between">
                 <button onclick="(loadWordDetails(${word.id}))" class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-circle-info"></i></button>
-                <button class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-volume-high"></i></button>
+                <button onclick="pronounceWord('${word.word}')" class="btn btn-accent p-2 rounded-md"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
         `;
