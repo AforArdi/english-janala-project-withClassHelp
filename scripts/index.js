@@ -124,3 +124,19 @@ const displayLessons=(lessons)=>{
 }
 
 loadLessons();
+
+// search js code
+document.getElementById('btn-search').addEventListener('click', ()=>{
+    const input = document.getElementById(['input-search']);
+    const inputValue = input.value.trim().toLowerCase();
+
+    fetch('https://openapi.programming-hero.com/api/words/all')
+        .then((res)=> res.json())
+        .then((data)=> {
+            const allWords = data.data;
+            const filteredWords = allWords.filter((word)=>
+                word.word.toLowerCase().includes(inputValue)
+            );
+            displayWord(filteredWords);
+        })
+})
