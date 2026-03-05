@@ -6,7 +6,8 @@ const loadLessons = () => {
 
 const removeActiveClass=()=>{
     const lessonBtns = document.querySelectorAll('.lesson-btn');
-    lessonBtns.forEach((btn)=> btn.classList.remove('active'))
+    lessonBtns.forEach((btn)=> btn.classList.remove('active'));
+    return;
 }
 
 const loadLevelWork=(id)=>{
@@ -65,7 +66,7 @@ const displayLessons=(lessons)=>{
     lessons.forEach((lesson)=>{
         const btnDiv = document.createElement('div');
         btnDiv.innerHTML = `
-            <button onclick="loadLevelWork(${lesson.level_no})" class="lesson-btn-${lesson.level_no} lesson-btn btn btn-soft btn-primary"><i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}</button>
+            <button onclick="loadLevelWork(${lesson.level_no})" id="lesson-btn-${lesson.level_no}" class="lesson-btn btn btn-soft btn-primary"><i class="fa-solid fa-book-open"></i> Lesson - ${lesson.level_no}</button>
         `;
         lessonContainer.append(btnDiv);
     })
